@@ -1,25 +1,31 @@
 <template>
-    <header class="menu-header">
+    <header>
       <router-link to="/">
         <img src="../assets/marvel-logo.svg" alt="marvel logo" class="logo" />
       </router-link>
-      <nav>
-        <router-link to="/" class="nav-link">Home</router-link>
-        <router-link to="/history" class="nav-link">History</router-link>
-      </nav>
     </header>
+    <nav>
+      <router-link to="/" class="nav-link">Home</router-link>
+      <router-link to="/history" class="nav-link">History</router-link>
+    </nav>
   </template>
   
   <style lang="sass">
-  .menu-header
-    background-color: #333
-    padding: 5px
+  header
+    background-color: #202020
+    padding: 10px
     display: flex
-    justify-content: space-between
+    justify-content: center
     align-items: center
   
     .logo
       max-height: 50px
+  nav
+    background-color: #333
+    padding: 10px
+    display: flex
+    justify-content: center
+    align-items: center
   
     .nav-link
       color: white
