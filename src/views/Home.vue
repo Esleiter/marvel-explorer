@@ -3,8 +3,8 @@ import { onMounted, ref } from 'vue';
 import { useFetchSeries } from '../stores/fetchSeries';
 
 const fetchSeries = useFetchSeries();
-const page = ref(1); // Página actual
-const perPage = 10; // Cantidad de series por página
+const page = ref(1);
+const perPage = 10;
 
 onMounted(() => {
   if  (fetchSeries.series.length === 0) {
