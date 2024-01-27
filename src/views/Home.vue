@@ -7,7 +7,9 @@ const page = ref(1); // Página actual
 const perPage = 10; // Cantidad de series por página
 
 onMounted(() => {
-  fetchSeries.fetchSeries(perPage, 0); // Cargar las primeras series
+  if  (fetchSeries.series.length === 0) {
+    fetchSeries.fetchSeries(perPage, 0);
+  }
   window.addEventListener('scroll', handleScroll);
 });
 
