@@ -1,24 +1,20 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import Menu from './components/Menu.vue'
-
 </script>
 
 <template>
   <Menu />
-  <router-view />
+  <RouterView v-slot="{ Component }">
+    <template v-if="Component">
+      <Suspense>
+        <component :is="Component"></component>
+        <template #fallback>
+          <div>
+            <h2><span class="loader"></span></h2>
+          </div>
+        </template>
+      </Suspense>
+    </template>
+  </RouterView>
 </template>
-
-<style lang="sass">
-  .logo
-    height: 6em
-    padding: 1.5em
-    will-change: filter
-    transition: filter 300ms
-
-    &:hover
-      filter: drop-shadow(0 0 2em #646cffaa)
-
-  .logo.vue:hover
-    filter: drop-shadow(0 0 2em #42b883aa)
-</style>
 

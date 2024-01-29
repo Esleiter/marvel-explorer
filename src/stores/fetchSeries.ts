@@ -1,30 +1,54 @@
 import { defineStore } from "pinia";
+import { getMarvelApiParams } from "../marvel-api-config";
+
+export interface Serie {
+  id: number;
+  startYear: number;
+  endYear: number;
+  title: string;
+  type: string;
+  thumbnail: { path: string; extension: string };
+  stories: { available: number; tuhmbnail: string; items: any[]};
+  comics: { available: number; collectionURI: string; items: any[]; returned: number };
+  urls: { type: string; url: string }[]
+}
+
+const marvelApiParams = getMarvelApiParams();
 
 export const useFetchSeries = defineStore({
   id: "fetchSeries",
-  state: () => ({
-    series: [] as any[],
+  state: (): {
+    series: Serie[];
+    loading: boolean;
+  } => ({
+    series: [],
+    loading: false,
   }),
   actions: {
     async fetchSeries(limit: number, offset: number) {
-      const response = await fetch(`https://gateway.marvel.com/v1/public/series?ts=1&apikey=e3a335c49726102dcd095379c0662229&hash=bd0fac4c98eb443484aa5bc036fca204&limit=${limit}&offset=${offset}`);
-      const data = await response.json();
-      
-      data.data.results.forEach((serie: any) => {
-        this.series.push({
-          id: serie.id,
-          title: serie.title,
-          description: serie.description,
-          startYear: serie.startYear,
-          endYear: serie.endYear,
-          thumbnail: serie.thumbnail,
-          creators: serie.creators,
-          characters: serie.characters,
-          stories: serie.stories,
-          comics: serie.comics,
-          urls: serie.urls,
+      try {
+        this.loading = true;
+        const response = await fetch(`https://gateway.marvel.com/v1/public/series?${marvelApiParams}&limit=${limit}&offset=${offset}`);
+        const data = await response.json();
+
+        data.data.results.forEach((serie: any) => {
+          this.series.push({
+            id: serie.id,
+            startYear: serie.startYear,
+            endYear: serie.endYear,
+            title: serie.title,
+            type: serie.type,
+            thumbnail: serie.thumbnail,
+            stories: serie.stories,
+            comics: serie.comics,
+            urls: serie.urls,
+          });
         });
-      });
+      } catch (error) {
+        console.error('Error al cargar series:', error);
+      } finally {
+        this.loading = false;
+      }
     },
   },
 });
