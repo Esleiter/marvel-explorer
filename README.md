@@ -12,3 +12,17 @@ Make sure you have Node.js, npm, and Docker installed on your machine before fol
 gh repo clone Esleiter/marvel-explorer
 cd marvel-explorer
 ```
+
+2. Construye la imagen de Docker:
+
+```bash
+docker build -t marvel-explorer .
+```
+
+3. Ejecuta la aplicación en un contenedor Docker:
+
+```bash
+docker run -p 8080:80 marvel-explorer
+```
+
+La aplicación estará disponible en `http://localhost:8080`.
