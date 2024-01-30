@@ -1,4 +1,4 @@
-# Marvel Explorer
+#MarvelExplorer
 
 Marvel Explorer is an application that allows you to explore and obtain detailed information about Marvel series. You can discover new series, get details about each one, and explore related resources such as comics and stories.
 
@@ -13,16 +13,16 @@ gh repo clone Esleiter/marvel-explorer
 cd marvel-explorer
 ```
 
-2. Construye la imagen de Docker:
+2. Build the Docker image:
 
 ```bash
 docker build -t marvel-explorer .
 ```
 
-3. Ejecuta la aplicación en un contenedor Docker:
+3. Run the application in a Docker container:
 
 ```bash
 docker run -p 8080:80 marvel-explorer
 ```
 
-La aplicación estará disponible en `http://localhost:8080`.
+The application will be available at `http://localhost:8080`.
