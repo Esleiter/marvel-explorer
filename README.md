@@ -1,4 +1,4 @@
-#MarvelExplorer
+# MarvelExplorer
 
 Marvel Explorer is an application that allows you to explore and obtain detailed information about Marvel series. You can discover new series, get details about each one, and explore related resources such as comics and stories.
 
