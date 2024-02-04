@@ -13,13 +13,26 @@ gh repo clone Esleiter/marvel-explorer
 cd marvel-explorer
 ```
 
-2. Build the Docker image:
+2. Create a .env file based on the provided exampl
+
+```bash
+cp .env-example .env
+```
+
+3. Open the .env file in a text editor and replace the placeholder values with your Marvel API keys:
+
+```
+VITE_MARVEL_API_KEY=YOUR_PUBLIC_KEY
+VITE_MARVEL_API_PRIVATE_KEY=YOUR_PRIVATE_KEY
+```
+
+4. Build the Docker image:
 
 ```bash
 docker build -t marvel-explorer .
 ```
 
-3. Run the application in a Docker container:
+5. Run the application in a Docker container:
 
 ```bash
 docker run -p 8080:80 marvel-explorer
