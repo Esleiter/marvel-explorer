@@ -13,7 +13,7 @@ gh repo clone Esleiter/marvel-explorer
 cd marvel-explorer
 ```
 
-2. Create a .env file based on the provided exampl
+2. Create a .env file based on the provided example
 
 ```bash
 cp .env-example .env
