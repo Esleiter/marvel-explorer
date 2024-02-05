@@ -31,6 +31,8 @@ export const useSaveSeries = defineStore({
       const storedData = localStorage.getItem("savesData");
       if (storedData) {
         this.saves = JSON.parse(storedData);
+      } else {
+        localStorage.setItem("savesData", JSON.stringify([]));
       }
     },
   },
