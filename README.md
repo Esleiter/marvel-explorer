@@ -4,7 +4,7 @@ Marvel Explorer is an application that allows you to explore and obtain detailed
 
 ## Installation
 
-Make sure you have Node.js, npm, and Docker installed on your machine before following these steps.
+Make sure you have Docker installed on your machine before following these steps.
 
 1. Clone this repository:
 
