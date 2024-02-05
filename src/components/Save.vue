@@ -17,8 +17,6 @@ defineProps(['id'])
 import { useSaveSeries } from '../stores/saveSeries';
 const saveSeries = useSaveSeries();
 
-localStorage.setItem("savesData", JSON.stringify([]));
-
 saveSeries.loadFromLocalStorage();
 </script>
 
