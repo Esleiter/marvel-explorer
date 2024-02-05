@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { getMarvelApiParams } from "../marvel-api-config";
 
@@ -104,33 +104,29 @@ async function fetchItemDetails(url: string) {
   return data.data.results[0];
 }
 
-await fetchDetails(id.value);
+details.value = await fetchDetails(id.value);
 
-onMounted(async () => {
-  details.value = await fetchDetails(id.value);
+const storyDetailsPromises = details.value.stories.items.map(async (story) => {
+  const storyDetails = await fetchItemDetails(story.resourceURI);
+  return storyDetails;
+});
 
-  const storyDetailsPromises = details.value.stories.items.map(async (story) => {
-    const storyDetails = await fetchItemDetails(story.resourceURI);
-    return storyDetails;
-  });
+const storyDetailsArray = await Promise.all(storyDetailsPromises);
 
-  const storyDetailsArray = await Promise.all(storyDetailsPromises);
+details.value.stories.items.forEach((story, index) => {
+  story.thumbnail = storyDetailsArray[index].thumbnail;
+  story.creators = storyDetailsArray[index].creators;
+});
 
-  details.value.stories.items.forEach((story, index) => {
-    story.thumbnail = storyDetailsArray[index].thumbnail;
-    story.creators = storyDetailsArray[index].creators;
-  });
+const comicDetailsPromises = details.value.comics.items.map(async (comic) => {
+  const comicDetails = await fetchItemDetails(comic.resourceURI);
+  return comicDetails;
+});
 
-  const comicDetailsPromises = details.value.comics.items.map(async (comic) => {
-    const comicDetails = await fetchItemDetails(comic.resourceURI);
-    return comicDetails;
-  });
+const comicDetailsArray = await Promise.all(comicDetailsPromises);
 
-  const comicDetailsArray = await Promise.all(comicDetailsPromises);
-
-  details.value.comics.items.forEach((comic, index) => {
-    comic.thumbnail = comicDetailsArray[index].thumbnail;
-    comic.creators = comicDetailsArray[index].creators;
-  });
+details.value.comics.items.forEach((comic, index) => {
+  comic.thumbnail = comicDetailsArray[index].thumbnail;
+  comic.creators = comicDetailsArray[index].creators;
 });
 </script>
